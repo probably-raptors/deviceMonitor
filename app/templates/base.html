@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8" name="viewport" content="width=device-width">
+<title>{{ title }}</title>
+
+<head>
+	<link rel="stylesheet" href="../static/css/normalize.css">
+	<link rel="stylesheet" href="../static/css/skeleton.css">
+	<link rel="stylesheet" href="../static/css/styles.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row" id="nav">
+			<div class="three columns">
+				<form action="{{ url_for('dashboard') }}" method="POST" id="message-form">
+					<input type="submit" value="Messages" class="button-primary" />
+				</form>
+			</div>
+			<div class="three columns">
+				<form action="{{url_for('captures') }}" method="POST" id="captures-form">
+					<input type="submit" value="Captures" class="button-primary" />
+				</form>
+			</div>
+			</form>
+			{% if request.path == "/dashboard" %}
+			<div class="three columns">
+				<form action="{{ url_for('send') }}" method="post" id="send-form">
+					<input type="submit" value="Send" class="button-primary" />
+				</form>
+			</div>
+			{% endif %}
+		</div>
+		{% block content %} {% endblock %}
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="/static/js/scripts.js"></script>
+</body>
+
+</html>
