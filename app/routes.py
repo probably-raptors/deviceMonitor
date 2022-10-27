@@ -28,9 +28,9 @@ def dashboard():
 @app.route("/captures", methods=["POST", "GET"])
 def captures():
     return render_template(
-        "_captures.html",
-        captures=blockchain.captures,
-        title="Captures",
+        "_dashboard.html",
+        messages=blockchain.captures,
+        title="Dashboard",
     )
 
 
@@ -42,13 +42,16 @@ def send():
         target = random.choice(Message.device_names)
     text = "".join(random.choices(string.ascii_letters + string.digits, k=16))
     message = Message(origin, target, text)
+    logger.info(f"New Message [{message.get_hash()}]")
 
     if Message.scan_message(message):
         blockchain.capture_message(message)
+        logger.info(f"Message Captured [{message.signature}]")
         return {
             "captures": [capture.to_json() for capture in blockchain.captures],
             "is_malicious": True,
         }
+
     blockchain.mine_block(message)
     data = f"""
     <div class="dashboard-row">
@@ -66,9 +69,8 @@ def send():
         </div>
     </div>
     """
-    is_malicious = False
 
     return {
         "data": data,
-        "is_malicious": is_malicious,
+        "is_malicious": False,
     }
