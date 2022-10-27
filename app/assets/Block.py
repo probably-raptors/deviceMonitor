@@ -20,6 +20,7 @@ class Block:
             self.index,
             self.previous_hash,
             self.nonce,
+            [message.to_json() for message in self.ledger.values()],
         )
 
     def __eq__(self, __o: object) -> bool:
