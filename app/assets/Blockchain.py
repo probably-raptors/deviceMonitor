@@ -41,13 +41,10 @@ class Blockchain:
 
     def mine_block(self, message: Message) -> Block:
         new_block = Block(next(reversed(self.blocks)))
-        logger.info(
-            f"New block #{new_block.index} created, waiting for hash assignment"
-        )
         new_hash = self.__proof_of_work(new_block)
-        logger.info(f"New hash [{new_hash}] found for block #{new_block.index}")
+        logger.info(f"New hash [{new_hash}] found for block")
         self.blocks[new_hash] = new_block
-        logger.info(f"New block #{new_block.index} added to local ledger")
+        logger.info(f"New message #{message.index} added to local ledger")
         self.update_ledgers(message)
         logger.info(f"Ledgers updated")
         return new_block
