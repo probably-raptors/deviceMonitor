@@ -20,7 +20,7 @@ class Block:
             self.index,
             self.previous_hash,
             self.nonce,
-            [message.to_json() for message in self.ledger.values()],
+            [message.get_hash() for message in self.ledger.values()],
         )
 
     def __eq__(self, __o: object) -> bool:
@@ -36,4 +36,4 @@ class Block:
         return sha256(block_string).hexdigest()
 
     def update_ledger(self, message: Message) -> None:
-        self.ledger[message.signature] = message
+        self.ledger[message.get_hash()] = message
