@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from .Message import Message
+from hashlib import sha256
 import itertools
-import hashlib
 import json
 
 
@@ -32,7 +32,7 @@ class Block:
 
     def get_hash(self) -> str:
         block_string = json.dumps(self.__key, sort_keys=True).encode()
-        return hashlib.sha256(block_string).hexdigest()
+        return sha256(block_string).hexdigest()
 
     def update_ledger(self, message: Message) -> None:
         self.ledger[message.signature] = message

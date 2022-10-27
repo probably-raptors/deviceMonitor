@@ -1,6 +1,6 @@
 from datetime import datetime
+from hashlib import sha256
 import itertools
-import hashlib
 import logging
 import random
 import string
@@ -61,7 +61,7 @@ class Message:
 
     def get_hash(self) -> str:
         msg_string = json.dumps(self.__key, sort_keys=True).encode()
-        return hashlib.sha256(msg_string).hexdigest()
+        return sha256(msg_string).hexdigest()
 
     def to_json(self):
         return json.dumps(self.__key, sort_keys=True, indent=4)
