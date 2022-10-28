@@ -4,12 +4,7 @@ from flask import Flask
 import logging
 
 app = Flask(__name__)
-# app.config.from_object(Config)
-dictConfig(Config.LOG_CONFIG)
+dictConfig(Config.LOGGING_CONFIG)
 app.logger.info("application startup")
-
-if app.debug:
-    wkz = logging.getLogger("werkzeug")
-    wkz.setLevel(logging.ERROR)
 
 from app import routes
