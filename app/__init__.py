@@ -3,7 +3,7 @@ from config import Config
 from flask import Flask
 
 app = Flask(__name__)
-app.config.from_object(Config)
 dictConfig(Config.LOGGING_CONFIG)
+app.logger.info("application startup")
 
 from app import routes
