@@ -20,7 +20,7 @@ class Block:
             self.index,
             self.previous_hash,
             self.nonce,
-            [message.signature for message in self.ledger.values()][: self.index],
+            [message.get_hash() for message in self.ledger.values()],
         )
 
     def __eq__(self, __o: object) -> bool:
