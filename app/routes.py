@@ -1,7 +1,7 @@
+from flask import render_template, redirect, url_for
 from .assets.Blockchain import Blockchain
 from .assets.Message import Message
 from .assets.Block import Block
-from flask import render_template
 from app import app
 import logging
 import random
@@ -10,6 +10,11 @@ import string
 
 blockchain = Blockchain()
 logger = logging.getLogger(__name__)
+
+
+@app.route("/")
+def home():
+    return redirect(url_for("dashboard"))
 
 
 @app.route("/dashboard", methods=["POST", "GET"])

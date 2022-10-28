@@ -37,7 +37,8 @@ class Blockchain:
     def update_ledgers(self, message: Message) -> None:
         for block in self.blocks.values():
             block: Block
-            block.ledger[message.get_hash()] = message
+            block.update_ledger(message)
+            # block.ledger[message.get_hash()] = message
 
     def mine_block(self, message: Message) -> Block:
         new_block = Block(next(reversed(self.blocks)))
